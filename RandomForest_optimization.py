@@ -1,43 +1,21 @@
 import sys
 import math
-import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-from sklearn.linear_model import Lasso
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import KFold
 from sklearn.model_selection import StratifiedKFold
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LassoCV
-import seaborn as sns
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import precision_score,auc, recall_score, roc_auc_score, roc_curve
-import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix
 import itertools
 from sklearn.preprocessing import MinMaxScaler
 from imblearn.ensemble import BalancedBaggingClassifier
-import pylab as pl
 from sklearn.model_selection import GridSearchCV
-from sklearn.model_selection import RandomizedSearchCV
 from imblearn.over_sampling import BorderlineSMOTE, KMeansSMOTE, ADASYN, SMOTE
 from sklearn.ensemble import VotingClassifier
-from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
-import pylab as pl
 from sklearn.model_selection import GridSearchCV
-from matplotlib.colors import Normalize
 from sklearn.preprocessing import StandardScaler
 from imblearn.pipeline import Pipeline, make_pipeline
-class MidpointNormalize(Normalize):
 
-    def __init__(self, vmin=None, vmax=None, midpoint=None, clip=False):
-        self.midpoint = midpoint
-        Normalize.__init__(self, vmin, vmax, clip)
-
-    def __call__(self, value, clip=None):
-        x, y = [self.vmin, self.midpoint, self.vmax], [0, 0.5, 1]
-        return np.ma.masked_array(np.interp(value, x, y))
 def main():
 	feat=sys.argv[1]
 
