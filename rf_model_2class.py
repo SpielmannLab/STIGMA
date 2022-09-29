@@ -30,15 +30,15 @@ from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 def main():
 	parser=argparse.ArgumentParser()
-	parser.add_argument("--inputfeature_matrix", help="n_estimator output from the optimization script")
-	parser.add_argument("--candidategenes", help="n_estimator output from the optimization script")
+	parser.add_argument("--inputfeature_matrix", help="inputfeature_matrix with all the features from single cell and database as a .tsv file")
+	parser.add_argument("--candidategenes", help="candidategenes as a tsv file")
 	parser.add_argument("--n_estimators", help="n_estimator output from the optimization script")
-	parser.add_argument("--max_depth", help="n_estimator output from the optimization script")
-	parser.add_argument("--min_samples_split", help="n_estimator output from the optimization script")
-	parser.add_argument("--min_samples_leaf", help="n_estimator output from the optimization script")
-	parser.add_argument("--max_features", help="n_estimator output from the optimization script")
-	parser.add_argument("--bootstrap", help="n_estimator output from the optimization script")
-	parser.add_argument("--n_neighbors", help="n_estimator output from the optimization script")
+	parser.add_argument("--max_depth", help="max_depth output from the optimization script")
+	parser.add_argument("--min_samples_split", help="min_samples_split output from the optimization script")
+	parser.add_argument("--min_samples_leaf", help="min_samples_leaf output from the optimization script")
+	parser.add_argument("--max_features", help="max_features output from the optimization script")
+	parser.add_argument("--bootstrap", help="bootstrap output from the optimization script")
+	parser.add_argument("--n_neighbors", help="n_neighbors output from the optimization script")
 	global args
 	args=parser.parse_args()
 	feat=args.inputfeature_matrix
