@@ -1,4 +1,4 @@
-import sys
+import argparse, sys
 import math
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -29,14 +29,25 @@ from sklearn.ensemble import VotingClassifier
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 def main():
-
-	feat=sys.argv[1]
-	candidate_genes=sys.argv[2]
+	parser=argparse.ArgumentParser()
+	parser.add_argument("--inputfeature_matrix", help="n_estimator output from the optimization script")
+	parser.add_argument("--candidategenes", help="n_estimator output from the optimization script")
+	parser.add_argument("--n_estimators", help="n_estimator output from the optimization script")
+	parser.add_argument("--max_depth", help="n_estimator output from the optimization script")
+	parser.add_argument("--min_samples_split", help="n_estimator output from the optimization script")
+	parser.add_argument("--min_samples_leaf", help="n_estimator output from the optimization script")
+	parser.add_argument("--max_features", help="n_estimator output from the optimization script")
+	parser.add_argument("--bootstrap", help="n_estimator output from the optimization script")
+	parser.add_argument("--n_neighbors", help="n_estimator output from the optimization script")
+	global args
+	args=parser.parse_args()
+	feat=args.inputfeature_matrix
+	candidate_genes=args.candidategenes
 	candidate_genes_df = pd.read_csv(candidate_genes,sep='\t')
 	df = pd.read_csv(feat,sep='\t')
-
+	print(df.columns)
 	df = df[df['hg_ensembl_id'].notna()]
-	df = df.set_index(['hg_ensembl_id','gene_symbol','hg_ensembl_id_1'])
+	df = df.set_index(['hg_ensembl_id','gene_symbol','mm_ensembl_id'])
 
 
 	X_test=df.drop(['Disease_Association'],axis=1)
@@ -55,6 +66,7 @@ def main():
 	definitions = factor[1]
 	print(df.Disease_Association.head())
 	print(definitions)
+	print(f"Args: {args}\nCommand Line: {sys.argv}\nfoo: {args.n_neighbors}")
 	Y = df[['Disease_Association']]
 	X = df.drop(['Disease_Association'],axis=1)
 
@@ -96,7 +108,7 @@ def main():
 	validate_gene=[]
 	validate_gene_short=[]
 	true_y=pd.DataFrame()
-	sm = ADASYN(random_state=42,n_neighbors=<5>)
+	sm = ADASYN(random_state=42,n_neighbors=int(args.n_neighbors))
 
 	X_sm, Y_sm = sm.fit_resample(X, Y)
 
@@ -178,7 +190,7 @@ def candidategenes(df_genes_pred,candidate_genes_df,candidate_genes):
 
 def cross_validate(X_train,X_validate,y_train,y_validate,counter,definitions):
 
-	model = RandomForestClassifier(n_estimators=<89>,  criterion='gini', max_depth=<30>, min_samples_split=<5>, min_samples_leaf=<1>, min_weight_fraction_leaf=0.0, max_features=<'auto'>, max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=<True>, oob_score=True, n_jobs=None, random_state=None, verbose=0, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)
+	model = RandomForestClassifier(n_estimators=int(args.n_estimators),  criterion='gini', max_depth=int(args.max_depth), min_samples_split=int(args.min_samples_split), min_samples_leaf=int(args.min_samples_leaf), min_weight_fraction_leaf=0.0, max_features=args.max_features, max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=bool(args.bootstrap), oob_score=True, n_jobs=None, random_state=None, verbose=0, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)
 
 	plt.clf()
 	visualizer = ROCAUC(model)
@@ -221,7 +233,7 @@ def cross_validate(X_train,X_validate,y_train,y_validate,counter,definitions):
 	return train_rf_predictions,train_rf_probs_0,train_rf_probs_1,rf_predictions,rf_probs_0,rf_probs_1
 
 def predict(X_train, y_train, X_test):
-	model = RandomForestClassifier(n_estimators=89,  criterion='gini', max_depth=30, min_samples_split=5, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=True, n_jobs=None, random_state=None, verbose=0, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)
+	model = RandomForestClassifier(n_estimators=int(args.n_estimators),  criterion='gini', max_depth=int(args.max_depth), min_samples_split=int(args.min_samples_split), min_samples_leaf=int(args.min_samples_leaf), min_weight_fraction_leaf=0.0, max_features=args.max_features, max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=bool(args.bootstrap), oob_score=True, n_jobs=None, random_state=None, verbose=0, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)
 
 
 
