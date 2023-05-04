@@ -67,7 +67,7 @@ def main():
 	# Number of features to consider at every split
 	max_features = ['auto', 'sqrt']
 	# Maximum number of levels in tree
-	max_depth = [10, 20, 30, 40, 50, 75, 100, 150, 200, 250, 300, None]
+	max_depth = [10, 15, 20, 30, 40, 50, 75, 100, 150, 200, 250, 300, None]
 	max_depth.append(None)
 	# Minimum number of samples required to split a node
 	min_samples_split = [2, 5, 10]
