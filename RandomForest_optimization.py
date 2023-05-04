@@ -63,7 +63,7 @@ def main():
 	X_test=pd.DataFrame(X_test_values, index=X_test.index, columns=X_test.columns)
 
 	# Number of trees in random forest
-	n_estimators = [10, 25, 50, 100, 250, 500, 750, 1000, 1250, 1500, 1750, 2000],
+	n_estimators = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200],
 	# Number of features to consider at every split
 	max_features = ['auto', 'sqrt']
 	# Maximum number of levels in tree
