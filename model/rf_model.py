@@ -47,7 +47,7 @@ def main():
 	df = pd.read_csv(feat,sep='\t')
 	print(df.columns)
 	df = df[df['hg_ensembl_id'].notna()]
-	df = df.set_index(['hg_ensembl_id','gene_symbol','mm_ensembl_id'])
+	df = df.set_index(['hg_ensembl_id','gene_symbol'])
 
 
 	X_test=df.drop(['Disease_Association'],axis=1)
