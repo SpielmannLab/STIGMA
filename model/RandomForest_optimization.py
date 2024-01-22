@@ -22,7 +22,7 @@ def main():
 	df = pd.read_csv(feat,sep='\t')
 
 	df = df[df['hg_ensembl_id'].notna()]
-	df = df.set_index(['hg_ensembl_id','gene_symbol','hg_ensembl_id_1'])
+	df = df.set_index(['hg_ensembl_id','gene_symbol'])
 
 	df1= df[df['Disease_Association'].isna()]
 
