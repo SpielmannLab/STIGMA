@@ -6,6 +6,29 @@ NGS has made gene analysis routine in clinics, yet many variants in genes of unk
 Here we introduce single-cell tissue-specific gene prioritization using machine learning (STIGMA) to prioritize disease gene for congenital malformations. STIGMA predicts the disease-causing probability of genes based on their expression profiles across cell types, while considering the temporal dynamics during the embryogenesis of a healthy (wild-type) organism.
 ![alt text](https://github.com/SpielmannLab/STIGMA/blob/main/GraphicalAbstract.png?raw=true)
 
+## Dependencies
+### R:
+1. Seurat
+2. Monocle3
+3. dplyr
+4. splines
+5. biomaRt
+6. AnnotationHub
+7. GenomicRanges
+8. BSgenome
+9. tidyr
+10. GenomicFeatures
+11. TxDb.Hsapiens.UCSC.hg38.knownGene
+
+### Python
+1. sklearn
+2. imblern
+3. pandas
+4. numpy
+5. math
+6. sys
+7. itertools
+8. matplotlib
 
 Inorder to run STIGMA we need to prepare the input matrix which consists of single cell features and gene intrinsic propersties, which can be done by following **STEP1** and **STEP2**. **STEP3** Formats the input. <br />
 
@@ -60,16 +83,16 @@ write.table(avg_expr,'Input_bsplines.tsv', sep='\t')
 
 
 ## STEP4: STIGMA optimization and gene prioritization<br />
-(1) STIGMA gene prediction model can be optimized by parsing [input.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/input.tsv) <br />
+1. STIGMA gene prediction model can be optimized by parsing [input.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/input.tsv) <br />
    ````
    python3 model/RandomForest_optimization.py input.tsv
 ````
-(2) STIGMA gene prediction model to predict test genes with [input.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/input.tsv) by running <br />
+2. STIGMA gene prediction model to predict test genes with [input.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/input.tsv) by running <br />
 ````
 python3 model/rf_model.py --inputfeature_matrix=input.tsv --candidategenes=[candidate_genes.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/CandidateGene.tsv) --n_estimators=\<Output from optimization\> --max_depth=\<Output from optimization\> --min_samples_split=\<Output from optimization\> --min_samples_leaf=\<Output from optimization\> --max_features=\<Output from optimization\> --bootstrap=\<Output from optimization\> --n_neighbors=\<Output from optimization\> <br />
 ````
 ## STEP5: STIGMA validation <br />
-(1) To optain the phenotypes associated with the congenital disease based on Monarch Initiative <br />
+1. To optain the phenotypes associated with the congenital disease based on Monarch Initiative <br />
 ````
 python3 validation/monarch_analysis.py 
 ````
