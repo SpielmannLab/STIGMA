@@ -24,32 +24,35 @@ Inorder to run STIGMA we need to prepare the input matrix which consists of sing
 1.	Proceed with the trajectory analysis pipeline, following [Monocle's](https://cole-trapnell-lab.github.io/monocle3/docs/trajectories/) methodology for each partition/cluster. <br />
 2.	Bin the generated pseudo time and incorporate it as metadata into the Seurat object.
    ````
-  ```
+
   pseudo <- data.frame(pseudotime(monocleobject, reduction_method = "UMAP"))
   colnames(pseudo)[1] <- 'pseudotime'
   seuratobject@meta.data$pseudotime<-pseudo$pseudotime[match(colnames(monocleobject), rownames(seuratobject))]
   seuratobject@meta.data$pseudotime.bin <- as.numeric(findInterval(seuratobject$pseudotime, quantile(seuratobject$pseudotime, seq(0,1, 1/10),na.rm=T)))
-  ```
+
   ````
 4.	Then, compute the average expression of all genes for each pseudo time bin column in the metadata.
 ````
-```
+
 avg_expr <- data.frame(AverageExpression(object=seuratobject, assays='RNA', slot='counts', group.by='pseudotime.bin'))
 write.table(avg_expr,'Input_bsplines.tsv', sep='\t')
-```
+
 ````
 5.	Fit a spline by running <br />
    ````
-```
+
    Rscript featurePreprocess/Bsplines.R [Input_bsplines.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/Input_bsplines.tsv). 
-```
+
 ````
 
 ### STEP2: Fetching Gene Intrinsic Properties: <br />
 
-1.	Extract gene intrinsic properties, such as promoter GC content, by executing featurePreprocess/PromoterGC.R. <br />
-2.	Obtain gene constraints, including metrics like pLI, pNull, pRec, syn_Z, mis_Z, and lof_Z, for protein-coding genes from gnomAD (v.2.1.1). <br />
-3.	Retrieve gene GC content from Biomart. <br />
+1.	Extract gene intrinsic properties, such as promoter GC content, by executing <br />
+````
+  	Rscript featurePreprocess/PromoterGC.R. 
+````
+3.	Obtain gene constraints, including metrics like pLI, pNull, pRec, syn_Z, mis_Z, and lof_Z, for protein-coding genes from [gnomAD](https://gnomad.broadinstitute.org/downloads#v4-constraint). In the paper we have used an older version of gnomad(v.2.1.1). <br />
+4.	Retrieve gene GC content from [Biomart](https://www.ensembl.org/biomart/martview). <br />
 
 ### STEP3: Creating the input matrix: <br />
 1. Once the features are obtained, they are stored as a [tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/input.tsv) with column as features and rows as genes. <br />
@@ -57,13 +60,19 @@ write.table(avg_expr,'Input_bsplines.tsv', sep='\t')
 
 
 ## STEP4: STIGMA optimization and gene prioritization<br />
-(1) STIGMA gene prediction model can be optimized by running model/RandomForest_optimization.py [input.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/input.tsv)<br />
+(1) STIGMA gene prediction model can be optimized by running <br />
+   ````
+   python3 model/RandomForest_optimization.py [input.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/input.tsv)
+````
 (2) STIGMA gene prediction model to predict test genes by running <br />
-python model/rf_model.py --inputfeature_matrix=[input.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/input.tsv) --candidategenes=[candidate_genes.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/CandidateGene.tsv) --n_estimators=\<Output from optimization\> --max_depth=\<Output from optimization\> --min_samples_split=\<Output from optimization\> --min_samples_leaf=\<Output from optimization\> --max_features=\<Output from optimization\> --bootstrap=\<Output from optimization\> --n_neighbors=\<Output from optimization\> <br />
-
+````
+python3 model/rf_model.py --inputfeature_matrix=[input.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/input.tsv) --candidategenes=[candidate_genes.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/CandidateGene.tsv) --n_estimators=\<Output from optimization\> --max_depth=\<Output from optimization\> --min_samples_split=\<Output from optimization\> --min_samples_leaf=\<Output from optimization\> --max_features=\<Output from optimization\> --bootstrap=\<Output from optimization\> --n_neighbors=\<Output from optimization\> <br />
+````
 ## STEP5: STIGMA validation <br />
-(1) To run explorative analysis based on Monarch Initiative validation/monarch_analysis.py <br />
-
+(1) To run explorative analysis based on Monarch Initiative <br />
+````
+python3 validation/monarch_analysis.py 
+````
 
 [1] Absolute paths are used at certain instances, which will need to be adapted, as needed. <br />
 [2] Anaconda was used to set up the necessary environments <br />
