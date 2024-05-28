@@ -24,4 +24,4 @@ limb_phenotype = df4.Ontology_Name.to_list()
 df5=df1[df1.object_label.isin(limb_phenotype)]
 
 df5 = df5.groupby(['subject_label','subject_taxon_label']).agg(lambda x:x.tolist())
-df5.to_csv('Projects/Prioritization/monarch/monarch_cardiac_genes.tsv', sep='\t')
+df5.to_csv('Projects/Prioritization/monarch/monarch_limb_genes.tsv', sep='\t')
