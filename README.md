@@ -1,5 +1,6 @@
 # STIGMA
 
+![alt text](https://github.com/SpielmannLab/STIGMA/blob/main/GraphicalAbstract.png?raw=true)
 Following scripts were used collect the features, optimize and build the model. <br />
 
 ## Input Feature preprocessing<br />
