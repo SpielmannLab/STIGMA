@@ -1,6 +1,12 @@
 # STIGMA
 
+## Introduction
+NGS has made gene analysis routine in clinics, yet many variants in genes of unknown function are labeled as variants of uncertain significance (VUSs) and do not contribute to a diagnosis of rare diseases, until further validated by experimental verification. Gene prioritization can help narrow down the list of candidate genes under consideration. . 
+
+Here we introduce single-cell tissue-specific gene prioritization using machine learning (STIGMA) to prioritize disease gene for congenital malformations. STIGMA predicts the disease-causing probability of genes based on their expression profiles across cell types, while considering the temporal dynamics during the embryogenesis of a healthy (wild-type) organism.
 ![alt text](https://github.com/SpielmannLab/STIGMA/blob/main/GraphicalAbstract.png?raw=true)
+
+
 Following scripts were used collect the features, optimize and build the model. <br />
 
 ## Input Feature preprocessing<br />
@@ -34,3 +40,7 @@ python model/rf_model.py --inputfeature_matrix=/Feature_input.tsv --candidategen
 
 [1] Absolute paths are used at certain instances, which will need to be adapted, as needed. <br />
 [2] Anaconda was used to set up the necessary environments <br />
+
+## Citations
+1. Balachandran, S., Prada-Medina, C.A., Mensah, M.A., Kakar, N., Nagel, I., Pozojevic, J., Audain, E., Hitz, M.-P., Kircher, M., Sreenivasan, V.K.A., et al. (2024). STIGMA: Single-cell tissue-specific gene prioritization using machine learning. Am J Hum Genet, S0002-9297(23)00443-3. https://doi.org/10.1016/j.ajhg.2023.12.011. [a link](https://doi.org/10.1016/j.ajhg.2023.12.011)
+
