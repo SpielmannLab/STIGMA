@@ -34,7 +34,7 @@ Following scripts were used collect the features, optimize and build the model. 
 ## STIGMA optimization and gene prioritization<br />
 (1) STIGMA gene prediction model can be optimized by running model/RandomForest_optimization.py [input.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/input.tsv)<br />
 (2) STIGMA gene prediction model to predict test genes by running <br />
-python model/rf_model.py --inputfeature_matrix=[input.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/input.tsv) --candidategenes=[candidate_genes.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/CandidateGene.tsv) --n_estimators=<Output from optimization> --max_depth=<Output from optimization> --min_samples_split=<Output from optimization> --min_samples_leaf=<Output from optimization> --max_features=<Output from optimization> --bootstrap=<Output from optimization> --n_neighbors=<Output from optimization> <br />
+python model/rf_model.py --inputfeature_matrix=[input.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/input.tsv) --candidategenes=[candidate_genes.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/CandidateGene.tsv) --n_estimators=/<Output from optimization/> --max_depth=<Output from optimization> --min_samples_split=<Output from optimization> --min_samples_leaf=<Output from optimization> --max_features=<Output from optimization> --bootstrap=<Output from optimization> --n_neighbors=<Output from optimization> <br />
 
 ## STIGMA validation <br />
 (1) To run explorative analysis based on Monarch Initiative validation/monarch_analysis.py <br />
