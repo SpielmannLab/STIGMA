@@ -90,7 +90,7 @@ write.table(avg_expr,'Input_bsplines.tsv', sep='\t')
 2. STIGMA gene prediction model to predict test genes with [input.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/input.tsv) by running <br />
 
 ````
-python3 model/rf_model.py --inputfeature_matrix=input.tsv --candidategenes=[candidate_genes.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/CandidateGene.tsv) --n_estimators=\<Output from optimization\> --max_depth=\<Output from optimization\> --min_samples_split=\<Output from optimization\> --min_samples_leaf=\<Output from optimization\> --max_features=\<Output from optimization\> --bootstrap=\<Output from optimization\> --n_neighbors=\<Output from optimization\> <br />
+python3 model/rf_model.py --inputfeature_matrix=input.tsv --candidategenes=[candidate_genes.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/CandidateGene.tsv) --n_estimators=\<Output from optimization\> --max_depth=\<Output from optimization\> --min_samples_split=\<Output from optimization\> --min_samples_leaf=\<Output from optimization\> --max_features=\<Output from optimization\> --bootstrap=\<Output from optimization\> --n_neighbors=\<Output from optimization\> 
 ````
 ## STEP5: STIGMA validation <br />
 1. To optain the phenotypes associated with the congenital disease based on Monarch Initiative <br />
