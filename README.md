@@ -29,6 +29,7 @@ Here we introduce single-cell tissue-specific gene prioritization using machine 
 6. sys
 7. itertools
 8. matplotlib
+   
 
 Inorder to run STIGMA we need to prepare the input matrix which consists of single cell features and gene intrinsic propersties, which can be done by following **STEP1** and **STEP2**. **STEP3** Formats the input. <br />
 
@@ -83,6 +84,8 @@ write.table(avg_expr,'Input_bsplines.tsv', sep='\t')
 
 
 ## STEP4: STIGMA optimization and gene prioritization<br />
+   Env : docker pull saranyabalachandr/stigma:v1
+   
 1. STIGMA gene prediction model can be optimized by parsing [input.tsv](https://github.com/SpielmannLab/STIGMA/blob/main/sample_dataset/input.tsv) <br />
    ````
    python3 model/RandomForest_optimization.py input.tsv
